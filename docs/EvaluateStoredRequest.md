@@ -7,8 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **version** | **int** |  | [optional] 
 **context** | [**Dict[str, FeelValue]**](FeelValue.md) |  | 
-**decision_services** | **List[str]** | List of Decision Services to evaluate | [optional] 
-**decisions** | **List[str]** | List of Decision or Decision Service names to evaluate | [optional] 
+**business_id** | **str** | Optional identifier for the business object being processed. If provided, existing metrics for this businessId and XML Definition ID will be replaced. | [optional] 
+**decision_services** | **List[str]** | Names of the Decision Services to evaluate (optional) | [optional] 
+**decisions** | **List[str]** | List of Decision or Decision Service names to evaluate (optional) | [optional] 
 
 ## Example
 

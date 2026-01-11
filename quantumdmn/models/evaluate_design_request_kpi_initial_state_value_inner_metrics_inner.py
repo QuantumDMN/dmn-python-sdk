@@ -17,22 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from quantumdmn.model.feel_value import FeelValue
 from typing import Optional, Set
 from typing_extensions import Self
 
-class EvaluateStoredRequest(BaseModel):
+class EvaluateDesignRequestKpiInitialStateValueInnerMetricsInner(BaseModel):
     """
-    EvaluateStoredRequest
+    EvaluateDesignRequestKpiInitialStateValueInnerMetricsInner
     """ # noqa: E501
-    version: Optional[StrictInt] = None
-    context: Dict[str, Optional[FeelValue]]
-    business_id: Optional[StrictStr] = Field(default=None, description="Optional identifier for the business object being processed. If provided, existing metrics for this businessId and XML Definition ID will be replaced.", alias="businessId")
-    decision_services: Optional[List[StrictStr]] = Field(default=None, description="Names of the Decision Services to evaluate (optional)", alias="decisionServices")
-    decisions: Optional[List[StrictStr]] = Field(default=None, description="List of Decision or Decision Service names to evaluate (optional)")
-    __properties: ClassVar[List[str]] = ["version", "context", "businessId", "decisionServices", "decisions"]
+    value: Optional[FeelValue]
+    var_field: StrictStr = Field(alias="field")
+    __properties: ClassVar[List[str]] = ["value", "field"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +49,7 @@ class EvaluateStoredRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of EvaluateStoredRequest from a JSON string"""
+        """Create an instance of EvaluateDesignRequestKpiInitialStateValueInnerMetricsInner from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,18 +70,19 @@ class EvaluateStoredRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each value in context (dict)
-        _field_dict = {}
-        if self.context:
-            for _key_context in self.context:
-                if self.context[_key_context]:
-                    _field_dict[_key_context] = self.context[_key_context].to_dict()
-            _dict['context'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of value
+        if self.value:
+            _dict['value'] = self.value.to_dict()
+        # set to None if value (nullable) is None
+        # and model_fields_set contains the field
+        if self.value is None and "value" in self.model_fields_set:
+            _dict['value'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of EvaluateStoredRequest from a dict"""
+        """Create an instance of EvaluateDesignRequestKpiInitialStateValueInnerMetricsInner from a dict"""
         if obj is None:
             return None
 
@@ -92,16 +90,8 @@ class EvaluateStoredRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "version": obj.get("version"),
-            "context": dict(
-                (_k, FeelValue.from_dict(_v))
-                for _k, _v in obj["context"].items()
-            )
-            if obj.get("context") is not None
-            else None,
-            "businessId": obj.get("businessId"),
-            "decisionServices": obj.get("decisionServices"),
-            "decisions": obj.get("decisions")
+            "value": FeelValue.from_dict(obj["value"]) if obj.get("value") is not None else None,
+            "field": obj.get("field")
         })
         return _obj
 

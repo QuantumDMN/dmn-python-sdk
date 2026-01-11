@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **context** | [**Dict[str, FeelValue]**](FeelValue.md) |  | [optional] 
 **decision_services** | **List[str]** | Names of the Decision Services to evaluate (optional) | [optional] 
 **decisions** | **List[str]** | List of Decision or Decision Service names to evaluate (optional) | [optional] 
+**kpi_initial_state** | **Dict[str, List[EvaluateDesignRequestKpiInitialStateValueInner]]** | Initial state for windowed KPIs (KPI ID -&gt; array of timestamped values) | [optional] 
 
 ## Example
 

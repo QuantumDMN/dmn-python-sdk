@@ -43,6 +43,8 @@ __all__ = [
     "DefinitionsQuota",
     "Error",
     "EvaluateDesignRequest",
+    "EvaluateDesignRequestKpiInitialStateValueInner",
+    "EvaluateDesignRequestKpiInitialStateValueInnerMetricsInner",
     "EvaluateStoredRequest",
     "EvaluationResult",
     "Execution",
@@ -180,6 +182,18 @@ from quantumdmn.engine import DmnEngine
 from quantumdmn.auth import ZitadelTokenProvider
 from quantumdmn.model.feel_value import FeelValue
 from quantumdmn.models.evaluate_design_request import EvaluateDesignRequest as EvaluateDesignRequest
+
+# custom classes
+from quantumdmn.engine import DmnEngine
+from quantumdmn.auth import ZitadelTokenProvider
+from quantumdmn.model.feel_value import FeelValue
+from quantumdmn.models.evaluate_design_request_kpi_initial_state_value_inner import EvaluateDesignRequestKpiInitialStateValueInner as EvaluateDesignRequestKpiInitialStateValueInner
+
+# custom classes
+from quantumdmn.engine import DmnEngine
+from quantumdmn.auth import ZitadelTokenProvider
+from quantumdmn.model.feel_value import FeelValue
+from quantumdmn.models.evaluate_design_request_kpi_initial_state_value_inner_metrics_inner import EvaluateDesignRequestKpiInitialStateValueInnerMetricsInner as EvaluateDesignRequestKpiInitialStateValueInnerMetricsInner
 
 # custom classes
 from quantumdmn.engine import DmnEngine

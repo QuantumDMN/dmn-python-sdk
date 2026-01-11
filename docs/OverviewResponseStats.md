@@ -5,7 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total_requests** | **int** |  | [optional] 
 **total_credits** | **int** |  | [optional] 
 **requests_trend** | [**List[DailyStat]**](DailyStat.md) |  | [optional] 
 **credits_trend** | [**List[DailyStat]**](DailyStat.md) |  | [optional] 

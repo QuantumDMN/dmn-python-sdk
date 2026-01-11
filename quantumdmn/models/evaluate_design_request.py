@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from quantumdmn.models.evaluate_design_request_kpi_initial_state_value_inner import EvaluateDesignRequestKpiInitialStateValueInner
 from quantumdmn.model.feel_value import FeelValue
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,7 +32,8 @@ class EvaluateDesignRequest(BaseModel):
     context: Optional[Dict[str, Optional[FeelValue]]] = None
     decision_services: Optional[List[StrictStr]] = Field(default=None, description="Names of the Decision Services to evaluate (optional)", alias="decisionServices")
     decisions: Optional[List[StrictStr]] = Field(default=None, description="List of Decision or Decision Service names to evaluate (optional)")
-    __properties: ClassVar[List[str]] = ["xml", "context", "decisionServices", "decisions"]
+    kpi_initial_state: Optional[Dict[str, List[EvaluateDesignRequestKpiInitialStateValueInner]]] = Field(default=None, description="Initial state for windowed KPIs (KPI ID -> array of timestamped values)", alias="kpiInitialState")
+    __properties: ClassVar[List[str]] = ["xml", "context", "decisionServices", "decisions", "kpiInitialState"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,6 +81,15 @@ class EvaluateDesignRequest(BaseModel):
                 if self.context[_key_context]:
                     _field_dict[_key_context] = self.context[_key_context].to_dict()
             _dict['context'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each value in kpi_initial_state (dict of array)
+        _field_dict_of_array = {}
+        if self.kpi_initial_state:
+            for _key_kpi_initial_state in self.kpi_initial_state:
+                if self.kpi_initial_state[_key_kpi_initial_state] is not None:
+                    _field_dict_of_array[_key_kpi_initial_state] = [
+                        _item.to_dict() for _item in self.kpi_initial_state[_key_kpi_initial_state]
+                    ]
+            _dict['kpiInitialState'] = _field_dict_of_array
         return _dict
 
     @classmethod
@@ -99,7 +110,15 @@ class EvaluateDesignRequest(BaseModel):
             if obj.get("context") is not None
             else None,
             "decisionServices": obj.get("decisionServices"),
-            "decisions": obj.get("decisions")
+            "decisions": obj.get("decisions"),
+            "kpiInitialState": dict(
+                (_k,
+                        [EvaluateDesignRequestKpiInitialStateValueInner.from_dict(_item) for _item in _v]
+                        if _v is not None
+                        else None
+                )
+                for _k, _v in obj.get("kpiInitialState", {}).items()
+            )
         })
         return _obj
 

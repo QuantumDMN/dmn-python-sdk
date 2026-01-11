@@ -28,12 +28,11 @@ class OverviewResponseStats(BaseModel):
     """
     OverviewResponseStats
     """ # noqa: E501
-    total_requests: Optional[StrictInt] = Field(default=None, alias="totalRequests")
     total_credits: Optional[StrictInt] = Field(default=None, alias="totalCredits")
     requests_trend: Optional[List[DailyStat]] = Field(default=None, alias="requestsTrend")
     credits_trend: Optional[List[DailyStat]] = Field(default=None, alias="creditsTrend")
     kpi_trends: Optional[List[KpiTrend]] = Field(default=None, alias="kpiTrends")
-    __properties: ClassVar[List[str]] = ["totalRequests", "totalCredits", "requestsTrend", "creditsTrend", "kpiTrends"]
+    __properties: ClassVar[List[str]] = ["totalCredits", "requestsTrend", "creditsTrend", "kpiTrends"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -107,7 +106,6 @@ class OverviewResponseStats(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "totalRequests": obj.get("totalRequests"),
             "totalCredits": obj.get("totalCredits"),
             "requestsTrend": [DailyStat.from_dict(_item) for _item in obj["requestsTrend"]] if obj.get("requestsTrend") is not None else None,
             "creditsTrend": [DailyStat.from_dict(_item) for _item in obj["creditsTrend"]] if obj.get("creditsTrend") is not None else None,

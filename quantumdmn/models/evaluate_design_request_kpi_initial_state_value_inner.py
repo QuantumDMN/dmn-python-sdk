@@ -17,22 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from quantumdmn.model.feel_value import FeelValue
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List
+from quantumdmn.models.evaluate_design_request_kpi_initial_state_value_inner_metrics_inner import EvaluateDesignRequestKpiInitialStateValueInnerMetricsInner
 from typing import Optional, Set
 from typing_extensions import Self
 
-class EvaluateStoredRequest(BaseModel):
+class EvaluateDesignRequestKpiInitialStateValueInner(BaseModel):
     """
-    EvaluateStoredRequest
+    EvaluateDesignRequestKpiInitialStateValueInner
     """ # noqa: E501
-    version: Optional[StrictInt] = None
-    context: Dict[str, Optional[FeelValue]]
-    business_id: Optional[StrictStr] = Field(default=None, description="Optional identifier for the business object being processed. If provided, existing metrics for this businessId and XML Definition ID will be replaced.", alias="businessId")
-    decision_services: Optional[List[StrictStr]] = Field(default=None, description="Names of the Decision Services to evaluate (optional)", alias="decisionServices")
-    decisions: Optional[List[StrictStr]] = Field(default=None, description="List of Decision or Decision Service names to evaluate (optional)")
-    __properties: ClassVar[List[str]] = ["version", "context", "businessId", "decisionServices", "decisions"]
+    metrics: List[EvaluateDesignRequestKpiInitialStateValueInnerMetricsInner]
+    timestamp: datetime = Field(description="Timestamp of the measurement (ISO 8601)")
+    __properties: ClassVar[List[str]] = ["metrics", "timestamp"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +50,7 @@ class EvaluateStoredRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of EvaluateStoredRequest from a JSON string"""
+        """Create an instance of EvaluateDesignRequestKpiInitialStateValueInner from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,18 +71,18 @@ class EvaluateStoredRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each value in context (dict)
-        _field_dict = {}
-        if self.context:
-            for _key_context in self.context:
-                if self.context[_key_context]:
-                    _field_dict[_key_context] = self.context[_key_context].to_dict()
-            _dict['context'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each item in metrics (list)
+        _items = []
+        if self.metrics:
+            for _item_metrics in self.metrics:
+                if _item_metrics:
+                    _items.append(_item_metrics.to_dict())
+            _dict['metrics'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of EvaluateStoredRequest from a dict"""
+        """Create an instance of EvaluateDesignRequestKpiInitialStateValueInner from a dict"""
         if obj is None:
             return None
 
@@ -92,16 +90,8 @@ class EvaluateStoredRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "version": obj.get("version"),
-            "context": dict(
-                (_k, FeelValue.from_dict(_v))
-                for _k, _v in obj["context"].items()
-            )
-            if obj.get("context") is not None
-            else None,
-            "businessId": obj.get("businessId"),
-            "decisionServices": obj.get("decisionServices"),
-            "decisions": obj.get("decisions")
+            "metrics": [EvaluateDesignRequestKpiInitialStateValueInnerMetricsInner.from_dict(_item) for _item in obj["metrics"]] if obj.get("metrics") is not None else None,
+            "timestamp": obj.get("timestamp")
         })
         return _obj
 

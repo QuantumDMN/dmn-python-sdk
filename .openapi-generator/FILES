@@ -2,7 +2,6 @@
 .gitignore
 .gitlab-ci.yml
 .travis.yml
-README.md
 docs/AddProjectMemberRequest.md
 docs/BatchEvaluateDesignRequest.md
 docs/BatchEvaluationResponse.md
@@ -19,6 +18,8 @@ docs/Definition.md
 docs/DefinitionsQuota.md
 docs/Error.md
 docs/EvaluateDesignRequest.md
+docs/EvaluateDesignRequestKpiInitialStateValueInner.md
+docs/EvaluateDesignRequestKpiInitialStateValueInnerMetricsInner.md
 docs/EvaluateStoredRequest.md
 docs/EvaluationResult.md
 docs/Execution.md
@@ -79,6 +80,8 @@ quantumdmn/models/definition.py
 quantumdmn/models/definitions_quota.py
 quantumdmn/models/error.py
 quantumdmn/models/evaluate_design_request.py
+quantumdmn/models/evaluate_design_request_kpi_initial_state_value_inner.py
+quantumdmn/models/evaluate_design_request_kpi_initial_state_value_inner_metrics_inner.py
 quantumdmn/models/evaluate_stored_request.py
 quantumdmn/models/evaluation_result.py
 quantumdmn/models/execution.py
