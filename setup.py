@@ -28,16 +28,17 @@ REQUIRES = [
     "python-dateutil >= 2.8.2",
     "pydantic >= 2",
     "typing-extensions >= 4.7.1",
+    "PyJWT >= 2.8.0",
 ]
 
 setup(
     name=NAME,
     version=VERSION,
-    description="Go DMN Web API",
-    author="OpenAPI Generator community",
-    author_email="team@openapitools.org",
-    url="",
-    keywords=["OpenAPI", "OpenAPI-Generator", "Go DMN Web API"],
+    description="QuantumDMN Python SDK",
+    author="QuantumDMN",
+    author_email="support@quantumdmn.com",
+    url="https://quantumdmn.com",
+    keywords=["QuantumDMN", "DMN", "dmn engine", "Python SDK", "BPMN"],
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
