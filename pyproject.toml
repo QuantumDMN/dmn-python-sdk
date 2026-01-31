@@ -1,5 +1,5 @@
 [project]
-name = "quantumdmn"
+name = "quantumdmn-sdk"
 version = "1.0.0"
 description = "QuantumDMN Python SDK"
 authors = [
