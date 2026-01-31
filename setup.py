@@ -29,6 +29,7 @@ REQUIRES = [
     "pydantic >= 2",
     "typing-extensions >= 4.7.1",
     "PyJWT >= 2.8.0",
+    "requests >= 2.31.0",
 ]
 
 setup(
