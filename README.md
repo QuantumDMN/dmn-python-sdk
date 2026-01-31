@@ -5,7 +5,7 @@ Python client library for the QuantumDMN decision engine API.
 ## Installation
 
 ```bash
-pip install quantumdmn
+pip install quantumdmn-sdk
 ```
 
 Or install from source:
