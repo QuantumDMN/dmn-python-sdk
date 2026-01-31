@@ -29,11 +29,12 @@ class EvaluateDesignRequest(BaseModel):
     EvaluateDesignRequest
     """ # noqa: E501
     xml: StrictStr
+    additional_xmls: Optional[List[StrictStr]] = Field(default=None, alias="additionalXmls")
     context: Optional[Dict[str, Optional[FeelValue]]] = None
     decision_services: Optional[List[StrictStr]] = Field(default=None, description="Names of the Decision Services to evaluate (optional)", alias="decisionServices")
     decisions: Optional[List[StrictStr]] = Field(default=None, description="List of Decision or Decision Service names to evaluate (optional)")
     kpi_initial_state: Optional[Dict[str, List[EvaluateDesignRequestKpiInitialStateValueInner]]] = Field(default=None, description="Initial state for windowed KPIs (KPI ID -> array of timestamped values)", alias="kpiInitialState")
-    __properties: ClassVar[List[str]] = ["xml", "context", "decisionServices", "decisions", "kpiInitialState"]
+    __properties: ClassVar[List[str]] = ["xml", "additionalXmls", "context", "decisionServices", "decisions", "kpiInitialState"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,6 +104,7 @@ class EvaluateDesignRequest(BaseModel):
 
         _obj = cls.model_validate({
             "xml": obj.get("xml"),
+            "additionalXmls": obj.get("additionalXmls"),
             "context": dict(
                 (_k, FeelValue.from_dict(_v))
                 for _k, _v in obj["context"].items()

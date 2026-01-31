@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **xml** | **str** |  | 
+**additional_xmls** | **List[str]** |  | [optional] 
 **context** | [**Dict[str, FeelValue]**](FeelValue.md) |  | [optional] 
 **decision_services** | **List[str]** | Names of the Decision Services to evaluate (optional) | [optional] 
 **decisions** | **List[str]** | List of Decision or Decision Service names to evaluate (optional) | [optional] 
